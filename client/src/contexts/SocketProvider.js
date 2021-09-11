@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import io from 'socket.io-client'
 
 const SocketContext = React.createContext()
+const SERVER_URL =  'https://ar-messaging-app.herokuapp.com/' || 'http://localhost:5000';
 
 export function useSocket() {
   return useContext(SocketContext)
@@ -12,7 +13,7 @@ export function SocketProvider({ id, children }) {
 
   useEffect(() => {
     const newSocket = io(
-      'http://localhost:5000',
+      SERVER_URL,
       { query: { id } }
     )
     setSocket(newSocket)
