@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 const SocketContext = React.createContext()
 
 // const DEV_ENDPOINT = 'http://localhost:5000/';
-const PROD_ENDPOINT = 'https://ar-messaging-app.herokuapp.com/';
+const PROD_ENDPOINT = 'https://be-messaging-app.herokuapp.com/';
 
 export function useSocket() {
   return useContext(SocketContext)
