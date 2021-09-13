@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import io from 'socket.io-client'
 const SocketContext = React.createContext()
 
-const DEV_ENDPOINT = 'http://localhost:5000/';
+// const DEV_ENDPOINT = 'http://localhost:5000/';
 const PROD_ENDPOINT = 'https://ar-messaging-app.herokuapp.com/';
 
 export function useSocket() {
