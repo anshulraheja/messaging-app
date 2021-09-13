@@ -1,17 +1,18 @@
-const PORT = process.env.PORT || 5000;
-const INDEX = '../client/public/index.html'
-
-const io = require('socket.io')(PORT,{
+// const httpServer = require("http").createServer();
+const PORT = process.env.PORT || 5000
+const io = require("socket.io")(PORT,{
   cors: {
-      origin: INDEX,
-      methods:["GET", "POST"],
-  },
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  }
 });
 
-io.on('connection', socket => {
+io.on("connection", (socket) => {
   const id = socket.handshake.query.id
   socket.join(id)
-  
+  console.log('connection joined')
   socket.on('send-message', ({ recipients, text }) => {
     recipients.forEach(recipient => {
       const newRecipients = recipients.filter(r => r !== recipient)
@@ -22,3 +23,5 @@ io.on('connection', socket => {
     })
   })
 })
+
+// httpServer.listen(5000, ()=> console.log('connected to 5000'));
