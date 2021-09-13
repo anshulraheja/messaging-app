@@ -1,6 +1,6 @@
-// const httpServer = require("http").createServer();
+const httpServer = require("http").createServer();
 const PORT = process.env.PORT || 5000
-const io = require("socket.io")(PORT,{
+const io = require("socket.io")(httpServer,{
   cors: {
     "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -12,7 +12,7 @@ const io = require("socket.io")(PORT,{
 io.on("connection", (socket) => {
   const id = socket.handshake.query.id
   socket.join(id)
-  console.log('connection joined')
+  console.log('socket joined')
   socket.on('send-message', ({ recipients, text }) => {
     recipients.forEach(recipient => {
       const newRecipients = recipients.filter(r => r !== recipient)
@@ -24,4 +24,4 @@ io.on("connection", (socket) => {
   })
 })
 
-// httpServer.listen(5000, ()=> console.log('connected to 5000'));
+httpServer.listen(PORT, ()=> console.log('Connected to '+PORT));
